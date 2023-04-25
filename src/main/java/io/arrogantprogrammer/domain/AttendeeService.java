@@ -1,14 +1,12 @@
 package io.arrogantprogrammer.domain;
 
-import io.smallrye.common.annotation.Blocking;
+import io.smallrye.reactive.messaging.MutinyEmitter;
 import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class AttendeeService {
@@ -18,14 +16,17 @@ public class AttendeeService {
     @Inject
     AttendeeRepository attendeeRepository;
 
+    @Inject
     @Channel("registrations")
-    Emitter<RegistrationEvent> registrationEventEmitter;
+    MutinyEmitter<RegistrationEvent> registrationEventEmitter;
 
-//    @Channel("catering")
-//    Emitter<CateringEvent> cateringEventEmitter;
-//
-//    @Channel("swag")
-//    Emitter<SwagEvent> swagEventEmitter;
+    @Inject
+    @Channel("catering")
+    MutinyEmitter<CateringEvent> cateringEventEmitter;
+
+    @Inject
+    @Channel("swag")
+    MutinyEmitter<SwagEvent> swagEventEmitter;
 
     /**
      * 1. Create an Attendee object
@@ -35,13 +36,15 @@ public class AttendeeService {
      * 5. Notify the swag domain of tshirt size
      *
      * @param registerAttendeeCommand
-         */
+     */
     public void registerAttendee(RegisterAttendeeCommand registerAttendeeCommand) {
         LOGGER.debug("RegisterAttendeeCommand received: {}", registerAttendeeCommand);
         RegisterAttendeeResult registerAttendeeResult = Attendee.registerAttendee(registerAttendeeCommand);
         Attendee attendee = registerAttendeeResult.attendee();
         attendeeRepository.persist(attendee);
-        registrationEventEmitter.send(registerAttendeeResult.registrationEvent());
+        registrationEventEmitter.sendAndAwait(registerAttendeeResult.registrationEvent());
+        cateringEventEmitter.sendAndAwait(registerAttendeeResult.cateringEvent());
+        swagEventEmitter.sendAndAwait(registerAttendeeResult.swagEvent());
         LOGGER.debug("persisted: {}", attendee);
     }
 }
