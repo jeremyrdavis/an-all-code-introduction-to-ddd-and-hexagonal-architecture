@@ -1,43 +1,57 @@
-# developerweek-ddd-06 Project
+# ddd-developerweek-2023
 
-## Conference Domains
+## Domains and Sub Domains
+
+Domain: Conference
+
+1. What makes the system worth writing?
+2. Why not buy it off the shelf?
+3. Why not outsource it?
+
+Core Subdomains:
 - Sessions
 - Attendees
-- Social Media
 - Catering
-- Swag (Giveaways)
+- Social Media
+- Swag
+- Sponsors
 
-## Domain Objects and Domain Events
-Domain objects use a "universal language"
-Domain events are events with business value
-
-## Entities and Aggregates
-Entities are persistent objects
-Aggregates encapsulate multiple persistent objects and interact with the system
-
-- Attendee (aggregate)
+## Entities
+Persistent objects
+- Attendee
 - Address
-- ConferenceSession
+
+### Aggregate
+Top level object
+- Attendee
+
+## Events
+Things that the business is interested in.  Statements of fact.
+- RegistrationEvent
+- CateringEvent
+- SwagEvent
 
 ## Value Objects
-Not persistent and do not contain business logic
-- AttendeeInfo
-- ConferenceSessionInfo
+Not persistent.  Represents a concept from the domain
+- *Events
+- AttendeeInfoValueObject
 
 ## Commands
-Trigger an action.  Should be idempotent.
+Request for action
+- RegisterAttendeeCommand
+
+## Repositories
+Repository pattern for persistence
+- AttendeeRepository
 
 ## Domain Services
-Expose the domain to other parts of the system and orchestrate functionality.
+Expose the domain to the rest of the system.  Enable *Hexagonal Architecture*
 - AttendeeService
 
 ## Adapters
-Interface with external systems/users; input and output to and for the system
-- REST adapter
-- Kafka adapter
-
-## Integration with other Domains
-- Cooperation
-- Partnershpip
-- Shared Kernel
-- Customer/Supplier
+Enable input and output to and from the system
+- RESTAdapter
+- KafkaAdapter
+- RegistrationEventAdapter
+- SwagEventAdapter
+- CateringEventAdapter
