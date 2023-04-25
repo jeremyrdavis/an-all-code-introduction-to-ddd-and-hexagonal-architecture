@@ -2,10 +2,8 @@ package io.arrogantprogrammer.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Attendee extends PanacheEntity {
@@ -22,11 +20,22 @@ public class Attendee extends PanacheEntity {
 
     TShirtSize tShirtSize;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "attendee")
+    List<ConferenceSession> conferenceSessionList = new java.util.ArrayList<>();
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     Address address;
 
     MealPreference mealPreference;
+
+    public List<ConferenceSession> getConferenceSessionList() {
+        return conferenceSessionList;
+    }
+
+    public void setConferenceSessionList(List<ConferenceSession> conferenceSessionList) {
+        this.conferenceSessionList = conferenceSessionList;
+    }
 
     static RegisterAttendeeResult registerAttendee(RegisterAttendeeCommand registerAttendeeCommand) {
 

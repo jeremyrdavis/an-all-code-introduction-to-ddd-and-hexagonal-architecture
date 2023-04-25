@@ -36,3 +36,8 @@ Interface with external systems/users; input and output to and for the system
 - REST adapter
 - Kafka adapter
 
+## Integration with other Domains
+- Cooperation
+- Partnershpip
+- Shared Kernel
+- Customer/Supplier
