@@ -16,6 +16,19 @@ Core Subdomains:
 - Swag
 - Sponsors
 
+- Attendee
+
+## Domain Objects and Events
+### Domain Objects
+- Attendee
+- Address
+- ConferenceSession
+### Events
+- RegistrationEvent
+- SwagEvent
+- CateringEvent
+- SessionRegistrationEvent
+
 ## Entities
 Persistent objects
 - Attendee
@@ -49,7 +62,7 @@ Expose the domain to the rest of the system.  Enable *Hexagonal Architecture*
 - AttendeeService
 
 ## Adapters
-Enable input and output to and from the system
+Enable input and output to and from the system. Implement *Hexagonal Architecture*
 - RESTAdapter
 - KafkaAdapter
 - RegistrationEventAdapter

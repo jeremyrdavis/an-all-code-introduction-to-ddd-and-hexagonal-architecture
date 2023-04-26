@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class AttendeeService {
@@ -18,15 +20,15 @@ public class AttendeeService {
 
     @Inject
     @Channel("registrations")
-    MutinyEmitter<RegistrationEvent> registrationEventEmitter;
+    MutinyEmitter<RegistrationEvent> registrationEventAdapter;
 
     @Inject
     @Channel("catering")
-    MutinyEmitter<CateringEvent> cateringEventEmitter;
+    MutinyEmitter<CateringEvent> cateringEventAdapter;
 
     @Inject
     @Channel("swag")
-    MutinyEmitter<SwagEvent> swagEventEmitter;
+    MutinyEmitter<SwagEvent> swagEventAdapter;
 
     /**
      * 1. Create an Attendee object
@@ -38,13 +40,27 @@ public class AttendeeService {
      * @param registerAttendeeCommand
      */
     public void registerAttendee(RegisterAttendeeCommand registerAttendeeCommand) {
+
         LOGGER.debug("RegisterAttendeeCommand received: {}", registerAttendeeCommand);
+
         RegisterAttendeeResult registerAttendeeResult = Attendee.registerAttendee(registerAttendeeCommand);
         Attendee attendee = registerAttendeeResult.attendee();
         attendeeRepository.persist(attendee);
-        registrationEventEmitter.sendAndAwait(registerAttendeeResult.registrationEvent());
-        cateringEventEmitter.sendAndAwait(registerAttendeeResult.cateringEvent());
-        swagEventEmitter.sendAndAwait(registerAttendeeResult.swagEvent());
+        registrationEventAdapter.sendAndAwait(registerAttendeeResult.registrationEvent());
+        cateringEventAdapter.sendAndAwait(registerAttendeeResult.cateringEvent());
+        swagEventAdapter.sendAndAwait(registerAttendeeResult.swagEvent());
+
         LOGGER.debug("persisted: {}", attendee);
+    }
+
+    public List<AttendeeInfoValueObject> listAll() {
+        return attendeeRepository.listAll().stream().map(attendee -> {
+            return new AttendeeInfoValueObject(attendee.email,
+                    attendee.firstName,
+                    attendee.lastName,
+                    attendee.address.city,
+                    attendee.address.stateOrProvince,
+                    attendee.address.countryCode);
+        }).collect(Collectors.toList());
     }
 }

@@ -20,6 +20,8 @@ public class Attendee extends PanacheEntity {
 
     TShirtSize tShirtSize;
 
+    MealPreference mealPreference;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "attendee")
     List<ConferenceSession> conferenceSessionList = new java.util.ArrayList<>();
 
@@ -27,14 +29,25 @@ public class Attendee extends PanacheEntity {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     Address address;
 
-    MealPreference mealPreference;
-
-    public List<ConferenceSession> getConferenceSessionList() {
-        return conferenceSessionList;
+    Double calculatePrice(final Double basePrice) {
+        if (student) {
+            return (basePrice - (basePrice * 0.10));
+        } else if (impactedByLayoffs) {
+            return (basePrice - (basePrice * 0.50));
+        }else{
+            return basePrice;
+        }
     }
 
-    public void setConferenceSessionList(List<ConferenceSession> conferenceSessionList) {
-        this.conferenceSessionList = conferenceSessionList;
+    AttendeeInfoValueObject getAttendeeInfo() {
+        return new AttendeeInfoValueObject(
+                this.email,
+                this.firstName,
+                this.lastName,
+                this.address.city,
+                this.address.stateOrProvince,
+                this.address.countryCode
+        );
     }
 
     static RegisterAttendeeResult registerAttendee(RegisterAttendeeCommand registerAttendeeCommand) {
@@ -63,27 +76,6 @@ public class Attendee extends PanacheEntity {
         return new RegisterAttendeeResult(attendee, registrationEvent, cateringEvent, swagEvent);
     }
 
-    Double calculatePrice(final Double basePrice) {
-        if (student) {
-            return (basePrice - (basePrice * 0.10));
-        } else if (impactedByLayoffs) {
-            return (basePrice - (basePrice * 0.50));
-        }else{
-            return basePrice;
-        }
-    }
-
-    AttendeeInfoValueObject getAttendeeInfo() {
-        return new AttendeeInfoValueObject(
-                this.email,
-                this.firstName,
-                this.lastName,
-                this.student,
-                this.impactedByLayoffs,
-                this.tShirtSize,
-                this.mealPreference
-        );
-    }
 
     public Attendee() {
 

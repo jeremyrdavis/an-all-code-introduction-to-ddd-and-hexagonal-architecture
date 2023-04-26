@@ -31,27 +31,7 @@ public class RESTAdapter {
 
     @GET
     public Response allAttendees() {
-        return Response.ok().entity(Attendee.listAll()).build();
+        return Response.ok().entity(attendeeService.listAll()).build();
     }
 
-    @GET
-    @Path("/registerAttendeeCommandApi")
-    public Response registerAttendeeCommandApi() {
-        return Response.ok().entity(new RegisterAttendeeCommand(
-                "lemmy@motorhead.com",
-                "Lemmy",
-                "Kilminster",
-                false,
-                false,
-                TShirtSize.L,
-                MealPreference.NONE,
-                "6300 Forest Lawn Dr",
-                "Courts of Remembrance section, Columbarium of Sacred Trust, Map #ELB0, Elevation B (facing west wall), Outdoor Garden Niche 66400",
-                "Los Angeles",
-                "CA",
-                "90068",
-                "USA",
-                "http://www.motorhead.com"
-        )).build();
-    }
 }
