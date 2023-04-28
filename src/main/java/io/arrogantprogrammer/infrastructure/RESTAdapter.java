@@ -24,8 +24,11 @@ public class RESTAdapter {
     @POST
     @Transactional
     public Response registerAttendee(RegisterAttendeeCommand registerAttendeeCommand) {
+
         LOGGER.debug("RegisterAttendeeCommand received: {}", registerAttendeeCommand);
+
         attendeeService.registerAttendee(registerAttendeeCommand);
+
         return Response.accepted().build();
     }
 

@@ -1,7 +1,5 @@
 package io.arrogantprogrammer.domain;
 
-import java.net.URL;
-
 public record RegisterAttendeeCommand(
         String email,
         String firstName,

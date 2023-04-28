@@ -11,9 +11,9 @@
 "streetAddress2":"Courts of Remembrance section, Columbarium of Sacred Trust, Map #ELB0, Elevation B (facing west wall), Outdoor Garden Niche 66400",
 "city":"Los Angeles",
 "stateOrProvince": "CA",
-"postCode": "",
+"postCode": "90068",
 "countryCode":"USA",
-"referringUrl":"http://www.motorhead.com"
+"referringURL":"http://www.motorhead.com"
 }
 
 {
@@ -30,7 +30,7 @@
 "stateOrProvince": "CA",
 "postCode": "90020",
 "countryCode":"USA",
-"referringUrl":"http://www.ozzy.com"
+"referringURL":"http://www.ozzy.com"
 }
 
 {
@@ -47,7 +47,7 @@
 "stateOrProvince": "Gelderland",
 "postCode": "7121",
 "countryCode":"ND",
-"referringUrl":"http://www.acdc.com"
+"referringURL":"http://www.acdc.com"
 }
 
 # JSON for KCat

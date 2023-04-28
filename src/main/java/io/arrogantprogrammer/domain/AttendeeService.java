@@ -44,8 +44,10 @@ public class AttendeeService {
         LOGGER.debug("RegisterAttendeeCommand received: {}", registerAttendeeCommand);
 
         RegisterAttendeeResult registerAttendeeResult = Attendee.registerAttendee(registerAttendeeCommand);
+
         Attendee attendee = registerAttendeeResult.attendee();
         attendeeRepository.persist(attendee);
+
         registrationEventAdapter.sendAndAwait(registerAttendeeResult.registrationEvent());
         cateringEventAdapter.sendAndAwait(registerAttendeeResult.cateringEvent());
         swagEventAdapter.sendAndAwait(registerAttendeeResult.swagEvent());

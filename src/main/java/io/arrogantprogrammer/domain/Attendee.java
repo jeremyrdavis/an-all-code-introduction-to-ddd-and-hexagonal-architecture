@@ -18,8 +18,10 @@ public class Attendee extends PanacheEntity {
 
     boolean impactedByLayoffs;
 
+    @Enumerated(EnumType.STRING)
     TShirtSize tShirtSize;
 
+    @Enumerated(EnumType.STRING)
     MealPreference mealPreference;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "attendee")
@@ -29,11 +31,11 @@ public class Attendee extends PanacheEntity {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     Address address;
 
-    Double calculatePrice(final Double basePrice) {
+    public Double calculatePrice(Double basePrice) {
         if (student) {
-            return (basePrice - (basePrice * 0.10));
+            return basePrice - (basePrice * 0.10);
         } else if (impactedByLayoffs) {
-            return (basePrice - (basePrice * 0.50));
+            return basePrice - (basePrice * 0.50);
         }else{
             return basePrice;
         }
@@ -52,22 +54,23 @@ public class Attendee extends PanacheEntity {
 
     static RegisterAttendeeResult registerAttendee(RegisterAttendeeCommand registerAttendeeCommand) {
 
-        Attendee attendee = new Attendee();
-        attendee.email = registerAttendeeCommand.email();
-        attendee.firstName = registerAttendeeCommand.firstName();
-        attendee.lastName = registerAttendeeCommand.lastName();
-        attendee.student = registerAttendeeCommand.student();
-        attendee.impactedByLayoffs = registerAttendeeCommand.impactedByLayoffs();
-        attendee.tShirtSize = registerAttendeeCommand.tShirtSize();
-        attendee.mealPreference = registerAttendeeCommand.mealPreference();
-
-        attendee.address = new Address();
-        attendee.address.street = registerAttendeeCommand.streetAddress();
-        attendee.address.street2 = registerAttendeeCommand.streetAddress2();
-        attendee.address.city = registerAttendeeCommand.city();
-        attendee.address.stateOrProvince = registerAttendeeCommand.stateOrProvince();
-        attendee.address.countryCode = registerAttendeeCommand.countryCode();
-        attendee.address.postalCode = registerAttendeeCommand.postalCode();
+        Attendee attendee = new Attendee(
+                registerAttendeeCommand.email(),
+                registerAttendeeCommand.firstName(),
+                registerAttendeeCommand.lastName(),
+                registerAttendeeCommand.student(),
+                registerAttendeeCommand.impactedByLayoffs(),
+                registerAttendeeCommand.tShirtSize(),
+                registerAttendeeCommand.mealPreference(),
+                new Address(
+                        registerAttendeeCommand.streetAddress(),
+                        registerAttendeeCommand.streetAddress2(),
+                        registerAttendeeCommand.city(),
+                        registerAttendeeCommand.postalCode(),
+                        registerAttendeeCommand.stateOrProvince(),
+                        registerAttendeeCommand.countryCode()
+                )
+        );
 
         RegistrationEvent registrationEvent = new RegistrationEvent(attendee.email);
         CateringEvent cateringEvent = new CateringEvent(attendee.mealPreference);
@@ -79,5 +82,16 @@ public class Attendee extends PanacheEntity {
 
     public Attendee() {
 
+    }
+
+    Attendee(String email, String firstName, String lastName, boolean student, boolean impactedByLayoffs, TShirtSize tShirtSize, MealPreference mealPreference, Address address) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.student = student;
+        this.impactedByLayoffs = impactedByLayoffs;
+        this.tShirtSize = tShirtSize;
+        this.mealPreference = mealPreference;
+        this.address = address;
     }
 }
