@@ -41,7 +41,7 @@ public class Attendee extends PanacheEntity {
         }
     }
 
-    AttendeeInfoValueObject getAttendeeInfo() {
+    public AttendeeInfoValueObject getAttendeeInfo() {
         return new AttendeeInfoValueObject(
                 this.email,
                 this.firstName,
