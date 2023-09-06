@@ -1,11 +1,10 @@
-package io.arrogantprogrammer.domain;
+package io.arrogantprogrammer.attendees.domain;
 
+import io.arrogantprogrammer.attendees.domain.Attendee;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Address extends PanacheEntity {

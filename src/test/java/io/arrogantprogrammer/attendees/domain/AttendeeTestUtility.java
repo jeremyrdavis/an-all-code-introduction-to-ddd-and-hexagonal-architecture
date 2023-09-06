@@ -1,6 +1,10 @@
-package io.arrogantprogrammer.domain;
+package io.arrogantprogrammer.attendees.domain;
 
-public class TestUtility {
+import io.arrogantprogrammer.domain.MealPreference;
+import io.arrogantprogrammer.domain.RegisterAttendeeCommand;
+import io.arrogantprogrammer.domain.TShirtSize;
+
+public class AttendeeTestUtility {
 
     public static Attendee LemmyKilminster = new Attendee(
             "lemmy@motorhead.com",

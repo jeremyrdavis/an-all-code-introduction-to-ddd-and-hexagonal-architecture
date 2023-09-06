@@ -1,10 +1,12 @@
-package io.arrogantprogrammer.domain;
+package io.arrogantprogrammer.attendees.domain;
 
+import io.arrogantprogrammer.domain.AttendeeInfoValueObject;
+import io.arrogantprogrammer.domain.AttendeeRepository;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +22,7 @@ public class AttendeeServiceTest {
 
     @Test @TestTransaction
     public void testListAll() {
-        attendeeRepository.persist(TestUtility.LemmyKilminster);
+        attendeeRepository.persist(AttendeeTestUtility.LemmyKilminster);
         List<AttendeeInfoValueObject> attendeeInfoValueObjectList = attendeeService.listAll();
         assertEquals(1, attendeeInfoValueObjectList.size());
     }
