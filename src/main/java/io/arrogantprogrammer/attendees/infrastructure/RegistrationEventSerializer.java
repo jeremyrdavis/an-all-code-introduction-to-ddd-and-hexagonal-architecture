@@ -1,6 +1,6 @@
-package io.arrogantprogrammer.infrastructure;
+package io.arrogantprogrammer.attendees.infrastructure;
 
-import io.arrogantprogrammer.domain.RegistrationEvent;
+import io.arrogantprogrammer.attendees.domain.RegistrationEvent;
 import org.apache.kafka.common.serialization.Serializer;
 
 import java.nio.charset.StandardCharsets;

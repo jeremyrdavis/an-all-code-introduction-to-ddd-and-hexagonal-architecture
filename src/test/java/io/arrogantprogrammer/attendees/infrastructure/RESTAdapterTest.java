@@ -1,6 +1,6 @@
 package io.arrogantprogrammer.attendees.infrastructure;
 
-import io.arrogantprogrammer.domain.AttendeeInfoValueObject;
+import io.arrogantprogrammer.attendees.domain.AttendeeInfoValueObject;
 import io.arrogantprogrammer.attendees.domain.AttendeeService;
 import io.arrogantprogrammer.attendees.domain.AttendeeTestUtility;
 import io.quarkus.test.junit.QuarkusMock;

@@ -1,7 +1,6 @@
 package io.arrogantprogrammer.attendees.domain;
 
 
-import io.arrogantprogrammer.domain.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

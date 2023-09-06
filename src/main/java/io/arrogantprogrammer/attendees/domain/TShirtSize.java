@@ -1,4 +1,4 @@
-package io.arrogantprogrammer.domain;
+package io.arrogantprogrammer.attendees.domain;
 
 public enum TShirtSize {
 

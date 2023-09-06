@@ -1,9 +1,5 @@
 package io.arrogantprogrammer.attendees.domain;
 
-import io.arrogantprogrammer.domain.MealPreference;
-import io.arrogantprogrammer.domain.RegisterAttendeeCommand;
-import io.arrogantprogrammer.domain.TShirtSize;
-
 public class AttendeeTestUtility {
 
     public static Attendee LemmyKilminster = new Attendee(

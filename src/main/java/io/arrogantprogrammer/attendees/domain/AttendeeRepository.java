@@ -1,4 +1,4 @@
-package io.arrogantprogrammer.domain;
+package io.arrogantprogrammer.attendees.domain;
 
 
 import io.arrogantprogrammer.attendees.domain.Attendee;

@@ -1,7 +1,7 @@
-package io.arrogantprogrammer.infrastructure;
+package io.arrogantprogrammer.attendees.infrastructure;
 
 import io.arrogantprogrammer.attendees.domain.AttendeeService;
-import io.arrogantprogrammer.domain.RegisterAttendeeCommand;
+import io.arrogantprogrammer.attendees.domain.RegisterAttendeeCommand;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

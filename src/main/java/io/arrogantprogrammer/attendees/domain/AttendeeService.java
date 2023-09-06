@@ -1,6 +1,5 @@
 package io.arrogantprogrammer.attendees.domain;
 
-import io.arrogantprogrammer.domain.*;
 import io.smallrye.reactive.messaging.MutinyEmitter;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.slf4j.Logger;

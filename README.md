@@ -19,10 +19,12 @@ Core Subdomains:
 - Attendee
 
 ## Domain Objects and Events
+
 ### Domain Objects
 - Attendee
 - Address
 - ConferenceSession
+
 ### Events
 - RegistrationEvent
 - SwagEvent

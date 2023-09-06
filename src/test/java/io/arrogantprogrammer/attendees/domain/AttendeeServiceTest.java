@@ -1,7 +1,5 @@
 package io.arrogantprogrammer.attendees.domain;
 
-import io.arrogantprogrammer.domain.AttendeeInfoValueObject;
-import io.arrogantprogrammer.domain.AttendeeRepository;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
