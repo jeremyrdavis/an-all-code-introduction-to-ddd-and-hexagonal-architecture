@@ -1,12 +1,26 @@
 # ddd-developerweek-2023
 
-## Domains and Sub Domains
+## First Things
 
-Domain: Conference
-
+Questions to ask before we start coding:
 1. What makes the system worth writing?
 2. Why not buy it off the shelf?
 3. Why not outsource it?
+
+Good answers:
+1. What makes the system worth writing?
+- it delivers competitive advantage
+- it drives revenue
+- it increases customer satisfaction
+2. Why not buy it off the shelf?
+- it doesn't exist on any shelf
+3. Why not outsource it?
+- it is a product not a project
+- the business logic is complicated and requires domain expertise
+
+## Domains and Sub Domains
+
+Domain: Conference
 
 Core Subdomains:
 - Sessions
