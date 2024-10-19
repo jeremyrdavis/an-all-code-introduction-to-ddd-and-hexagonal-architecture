@@ -1,4 +1,4 @@
-# ddd-developerweek-2023
+# An All Code Introduction to Domain Driven Design and Hexagonal Architecture
 
 ## First Things
 
